@@ -17,8 +17,9 @@ import translationNL from "./resources/nl/translation.json";
 import translationIT from "./resources/it/translation.json";
 import translationJA from "./resources/ja/translation.json";
 import translationKO from "./resources/ko/translation.json";
-import { LocalizationSettings } from "../../utils/Interface";
-import { CalendarObject } from "../../utils/CalendarObject";
+import {LocalizationSettings} from "../../utils/Interface";
+import {CalendarObject} from "../../utils/CalendarObject";
+
 /**
  * The `CometChatLocalize` class handles localization for the CometChat application.
  * It provides functionality to detect the user's browser language settings and
@@ -211,13 +212,13 @@ class CometChatLocalize {
          */
         const monthNames = {
             short: [
-                getLocalizedString("month_january_short"), getLocalizedString("month_february_short"), getLocalizedString("month_march_short"), 
+                getLocalizedString("month_january_short"), getLocalizedString("month_february_short"), getLocalizedString("month_march_short"),
                 getLocalizedString("month_april_short"), getLocalizedString("month_may_short"), getLocalizedString("month_june_short"),
                 getLocalizedString("month_july_short"), getLocalizedString("month_august_short"), getLocalizedString("month_september_short"),
                 getLocalizedString("month_october_short"), getLocalizedString("month_november_short"), getLocalizedString("month_december_short")
             ],
             long: [
-                getLocalizedString("month_january_full"), getLocalizedString("month_february_full"), getLocalizedString("month_march_full"), 
+                getLocalizedString("month_january_full"), getLocalizedString("month_february_full"), getLocalizedString("month_march_full"),
                 getLocalizedString("month_april_full"), getLocalizedString("month_may_full"), getLocalizedString("month_june_full"),
                 getLocalizedString("month_july_full"), getLocalizedString("month_august_full"), getLocalizedString("month_september_full"),
                 getLocalizedString("month_october_full"), getLocalizedString("month_november_full"), getLocalizedString("month_december_full")
@@ -238,7 +239,7 @@ class CometChatLocalize {
             getLocalizedString("weekday_wednesday_full"), getLocalizedString("weekday_thursday_full"), getLocalizedString("weekday_friday_full"), getLocalizedString("weekday_saturday_full")
             ]
         };
-        
+
         const formatter = new Intl.DateTimeFormat(this.getDateLocaleLanguage(), options);
         const parts = formatter.formatToParts(date);
         const dayIndex = date.getDay();
@@ -295,8 +296,7 @@ class CometChatLocalize {
         .replace(/\bdddd\b/g, replacements["dddd"] || "")
         .replace(/\bddd\b/g, replacements["ddd"] || "")
         .replace(/\bdd\b/g, replacements["dd"] || "")
-        .replace(/(?<=\s|^)A(?=\s|$)/g, replacements["A"] || "");
-    
+        .replace(/(?:^|\s)A(?=\s|$)/g, (_, p1) => (p1 ? p1 : "") + (replacements["A"] || ""));
 
     }
 
