@@ -7,7 +7,6 @@ import typescript from "@rollup/plugin-typescript";
 import url from '@rollup/plugin-url';
 import postcss from 'rollup-plugin-postcss';
 import json from "@rollup/plugin-json";
-import { writeFile } from 'fs/promises';
 
 const packageJson = require("./package.json");
 export default [
@@ -16,13 +15,13 @@ export default [
     output: [
       {
         file: packageJson.main,
-        format: "cjs",
+        format: "esm",
         exports: "named",
         sourcemap: true,
       }
     ],
     plugins: [
-      postcss({ 
+      postcss({
         extensions: ['.css', '.scss'],
         extract: true,
         minimize: true,

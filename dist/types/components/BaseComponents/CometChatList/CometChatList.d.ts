@@ -1,0 +1,130 @@
+import { JSX } from "react";
+import { States } from "../../../Enums/Enums";
+export type DivElementRef = HTMLDivElement | null;
+interface ListProps<T> {
+    /**
+     * Menu view of the component
+     *
+     * @defaultValue `""`
+     */
+    headerView?: JSX.Element;
+    /**
+     * Hide the search bar
+     *
+     * @defaulValue `false`
+     */
+    hideSearch?: boolean;
+    /**
+     * Text to fill the search input with
+     *
+     * @defaultValue `""`
+     */
+    searchText?: string;
+    /**
+     * Function to call when the search input text changes
+     *
+     * @remarks
+     * This function will only be called after 500ms of the search input text change
+     */
+    onSearch?: (searchStr: string) => void;
+    /**
+     * Text to be displayed when the search input has no value
+     *
+     * @defaultValue `"Search"`
+     */
+    searchPlaceholderText?: string;
+    /**
+     * List of objects to display
+     */
+    list: T[];
+    /**
+     * Custom list item view to be rendered for each object in the `list` prop
+     */
+    itemView: (item: T, itemIndex: number) => JSX.Element;
+    /**
+     * Function to call when the scrollbar is at the top-most position of the scrollable list
+     */
+    onScrolledToBottom?: () => Promise<any>;
+    /**
+     * Function to call when the scrollbar is at the bottom-most position of the scrollable list
+     */
+    onScrolledToTop?: () => Promise<any>;
+    /**
+     * Function to call when the scrollbar is not at the bottom-most position of the scrollable list
+     */
+    scrolledUpCallback?: (boolean?: boolean) => void;
+    /**
+     * Show alphabetical header
+     *
+     * @defaultValue `true`
+     */
+    showSectionHeader?: boolean;
+    /**
+     * Property on each object in the `list` prop
+     *
+     * @remarks
+     * This property will be used to extract the section header character from each object in the `list` prop
+     */
+    sectionHeaderKey?: keyof T | string;
+    /**
+     * Property on each object in the `list` prop
+     *
+     * @remarks
+     * This property will be used to extract the key value from each object in the `list` prop. The extracted key value is set as a `key` of a React element
+     */
+    listItemKey?: keyof T | string;
+    /**
+     * Fetch state of the component
+     */
+    state: States;
+    /**
+     * Custom view for the loading state of the component
+     */
+    loadingView?: JSX.Element;
+    /**
+     * Hide error view
+     *
+     * @remarks
+     * If set to true, hides the default and the custom error view
+     *
+     * @defaultValue `false`
+     */
+    hideError?: boolean;
+    /**
+     * Custom view for the error state of the component
+     */
+    errorView?: JSX.Element;
+    /**
+     * Custom view for the empty state of the component
+     */
+    emptyView?: JSX.Element;
+    /**
+     * Set the scrollbar to the bottom-most position of the scrollable list
+     *
+     * @remarks
+     * If the scrollbar of the scrollable list is set to the bottom-most position of the scrollable list because of this `prop`, the component won't call the `onScrolledToBottom` prop
+     */
+    scrollToBottom?: boolean;
+    /**
+     * Function to call whenever the component encounters an error
+     */
+    onError?: ((error: CometChat.CometChatException) => void) | null;
+    /**
+   * Title of the component
+   *
+   * @defaultValue `""`
+   */
+    title?: string;
+}
+/**
+ * Renders a list component that can display a title, search bar,
+ * and items with optional section headers.
+ *
+ * @param props - The props for configuring the list
+ */
+declare function List<T>(props: ListProps<T>): JSX.Element;
+/**
+ * Renders a scrollable list
+ */
+export declare const CometChatList: typeof List;
+export {};
